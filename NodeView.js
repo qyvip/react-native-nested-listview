@@ -64,6 +64,8 @@ export default class NodeView extends React.PureComponent<Props, State> {
   renderItem = ({item}: {item: Node}) =>
     this.renderChildren(item, this.props.level)
 
+  _keyExtractor = (item, index) => index;
+
   render() {
     const rootChildrenName = this.props.getChildrenName(this.state.node)
     const rootChildren = this.state.node[rootChildrenName]
@@ -81,7 +83,7 @@ export default class NodeView extends React.PureComponent<Props, State> {
           <FlatList
             data={rootChildren}
             renderItem={this.renderItem}
-            keyExtractor={item => item.id}
+             keyExtractor={this._keyExtractor}
           />
         ) : null}
       </View>
